@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 namespace tarea
 {
@@ -7,12 +7,13 @@ namespace tarea
         static void Main(string[] args)
         {
             string cont;
-            int cont0 , cont1 , cont2;
+            int cont0, cont1, cont2;
             cont0 = cont1 = cont2 = 0;
             bool continuar = true;
 
             persona[] lista13 = new persona[1000], lista27 = new persona[1000], lista100 = new persona[1000];
-            while (continuar) { 
+            while (continuar)
+            {
 
                 persona usuario = new persona();
 
@@ -37,26 +38,31 @@ namespace tarea
                 System.Console.WriteLine("¿Desea ingresar otro usuario?: Y/N");
                 cont = System.Console.ReadLine();
 
-                if (cont == "Y" || cont == "y"){
+                if (cont == "Y" || cont == "y")
+                {
                     continuar = true;
                 }
-                else{
+                else
+                {
                     continuar = false;
                 }
 
-                if(usuario.getEdad()<=(13*365)){
+                if (usuario.getEdad() <= (13 * 365))
+                {
 
                     lista13[cont0] = usuario;
                     cont0 = cont0 + 1;
                 }
-                if(usuario.getEdad()>(13*365) && usuario.getEdad()<=(27*365)){
+                if (usuario.getEdad() > (13 * 365) && usuario.getEdad() <= (27 * 365))
+                {
 
                     lista27[cont1] = usuario;
 
                     cont1 = cont1 + 1;
 
                 }
-                if(usuario.getEdad()>(27*365)){
+                if (usuario.getEdad() > (27 * 365))
+                {
 
                     lista100[cont2] = usuario;
 
@@ -64,48 +70,54 @@ namespace tarea
 
                 }
             }
-                using(StreamWriter personas = new StreamWriter("personas.txt"))
+            using (StreamWriter personas = new StreamWriter("personas.txt"))
+            {
+                for (int j = 0; j < cont0; j++)
                 {
-                    for(int j = 0 ;j<cont0 ;j++)
+
+                    if (j == 0)
                     {
 
-                        if (j == 0){
-
-                            personas.WriteLine("Personas menores a 13 años: " + lista13[j].getNombre() + " " + lista13[j].getS_nombre() + " " + lista13[j].getApellido() + " " + lista13[j].getS_apellido() + " " + lista13[j].getEdad() + " " + lista13[j].getDireccion() + "\n");
-                        }
-
-                        else{
-                            personas.WriteLine(lista13[j].getNombre() + " " + lista13[j].getS_nombre() + " " + lista13[j].getApellido() + " " + lista13[j].getS_apellido() + " " + lista13[j].getEdad() + " " + lista13[j].getDireccion() + "\n");
-                        }
-
+                        personas.WriteLine("Personas menores a 13 años: " + lista13[j].getNombre() + " " + lista13[j].getS_nombre() + " " + lista13[j].getApellido() + " " + lista13[j].getS_apellido() + " " + lista13[j].getFecha_nacimiento() + " " + lista13[j].getDireccion() + "\n");
                     }
-                    for(int j = 0 ;j<cont1 ;j++)
+
+                    else
+                    {
+                        personas.WriteLine(lista13[j].getNombre() + " " + lista13[j].getS_nombre() + " " + lista13[j].getApellido() + " " + lista13[j].getS_apellido() + " " + lista13[j].getFecha_nacimiento() + " " + lista13[j].getDireccion() + "\n");
+                    }
+
+                }
+                for (int j = 0; j < cont1; j++)
+                {
+
+                    if (j == 0)
                     {
 
-                        if (j == 0){
-
-                            personas.WriteLine("Personas mayores a 13 años: " + lista27[j].getNombre() + " " + lista27[j].getS_nombre() + " " + lista27[j].getApellido() + " " + lista27[j].getS_apellido() + " " + lista27[j].getEdad() + " " + lista27[j].getDireccion() + "\n");
-                        }
-
-                        else{
-                            personas.WriteLine(lista27[j].getNombre() + " " + lista27[j].getS_nombre() + " " + lista27[j].getApellido() + " " + lista27[j].getS_apellido() + " " + lista27[j].getEdad() + " " + lista27[j].getDireccion() + "\n");
-                        }
+                        personas.WriteLine("Personas mayores a 13 años: " + lista27[j].getNombre() + " " + lista27[j].getS_nombre() + " " + lista27[j].getApellido() + " " + lista27[j].getS_apellido() + " " + lista27[j].getFecha_nacimiento() + " " + lista27[j].getDireccion() + "\n");
                     }
-                    for(int j = 0 ;j<cont2 ;j++)
+
+                    else
+                    {
+                        personas.WriteLine(lista27[j].getNombre() + " " + lista27[j].getS_nombre() + " " + lista27[j].getApellido() + " " + lista27[j].getS_apellido() + " " + lista27[j].getFecha_nacimiento() + " " + lista27[j].getDireccion() + "\n");
+                    }
+                }
+                for (int j = 0; j < cont2; j++)
+                {
+
+                    if (j == 0)
                     {
 
-                        if (j == 0){
-
-                            personas.WriteLine("Personas mayores a 27 años: " + lista100[j].getNombre() + " " + lista100[j].getS_nombre() + " " + lista100[j].getApellido() + " " + lista100[j].getS_apellido() + " " + lista100[j].getEdad() + " " + lista100[j].getDireccion() + "\n");
-                        }
-
-                        else{
-                            personas.WriteLine(lista100[j].getNombre() + " " + lista100[j].getS_nombre() + " " + lista100[j].getApellido() + " " + lista100[j].getS_apellido() + " " + lista100[j].getEdad() + " " + lista100[j].getDireccion() + "\n");
-                        }
-
+                        personas.WriteLine("Personas mayores a 27 años: " + lista100[j].getNombre() + " " + lista100[j].getS_nombre() + " " + lista100[j].getApellido() + " " + lista100[j].getS_apellido() + " " + lista100[j].getFecha_nacimiento() + " " + lista100[j].getDireccion() + "\n");
                     }
 
-                 }
+                    else
+                    {
+                        personas.WriteLine(lista100[j].getNombre() + " " + lista100[j].getS_nombre() + " " + lista100[j].getApellido() + " " + lista100[j].getS_apellido() + " " + lista100[j].getFecha_nacimiento() + " " + lista100[j].getDireccion() + "\n");
+                    }
+
+                }
+
+            }
         }
     }
     class persona
@@ -152,6 +164,10 @@ namespace tarea
             DateTime birth = DateTime.Parse(fecha_nacimiento);
             DateTime actual = new DateTime(2020, 09, 10);
             edad = actual.Subtract(birth).Days;
+        }
+        public String getFecha_nacimiento()
+        {
+            return this.fecha_nacimiento;
         }
         public Int32 getEdad()
         {

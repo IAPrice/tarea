@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using Tarea1.Classes;
 namespace tarea
 {
     class program
@@ -11,29 +14,31 @@ namespace tarea
             cont0 = cont1 = cont2 = 0;
             bool continuar = true;
 
-            persona[] lista13 = new persona[1000], lista27 = new persona[1000], lista100 = new persona[1000];
+            var lista13 = new List<Persona>();
+            var lista27 = new List<Persona>();
+            var lista100 = new List<Persona>();
             while (continuar)
             {
 
-                persona usuario = new persona();
+                var usuario = new Persona();
 
                 System.Console.WriteLine("Ingrese el nombre de la persona: \n");
-                usuario.setNombre(System.Console.ReadLine());
+                usuario.nombre = System.Console.ReadLine();
 
                 System.Console.WriteLine("Ingrese el segundo nombre de la persona: \n");
-                usuario.setS_nombre(System.Console.ReadLine());
+                usuario.segundo_nombre = System.Console.ReadLine();
 
                 System.Console.WriteLine("Ingrese el apellido de la persona: \n");
-                usuario.setApellido(System.Console.ReadLine());
+                usuario.apellido_paterno = System.Console.ReadLine();
 
                 System.Console.WriteLine("Ingrese el segundo apellido de la persona: \n");
-                usuario.setS_apellido(System.Console.ReadLine());
+                usuario.apellido_materno = System.Console.ReadLine();
 
                 System.Console.WriteLine("Ingrese la fecha de nacimiento de la persona: \n");
-                usuario.setFecha_nacimiento(System.Console.ReadLine());
+                usuario.fecha_nacimiento = DateTime.ParseExact(Console.ReadLine(),"dd/mm/yyyy", CultureInfo.InvariantCulture);
 
                 System.Console.WriteLine("Ingrese la direccion de la persona: \n");
-                usuario.setDireccion(System.Console.ReadLine());
+                usuario.direccion = System.Console.ReadLine();
 
                 System.Console.WriteLine("¿Desea ingresar otro usuario?: Y/N");
                 cont = System.Console.ReadLine();
@@ -47,26 +52,26 @@ namespace tarea
                     continuar = false;
                 }
 
-                if (usuario.getEdad() <= (13 * 365))
+                if (usuario.GetEdad() <= 13)
                 {
 
-                    lista13[cont0] = usuario;
-                    cont0 = cont0 + 1;
+                    lista13.Add(usuario);
+                    cont0 += 1;
                 }
-                if (usuario.getEdad() > (13 * 365) && usuario.getEdad() <= (27 * 365))
+                if (usuario.GetEdad() > 13 && usuario.GetEdad() <= 27)
                 {
 
-                    lista27[cont1] = usuario;
+                    lista27.Add(usuario);
 
-                    cont1 = cont1 + 1;
+                    cont1 += 1;
 
                 }
-                if (usuario.getEdad() > (27 * 365))
+                if (usuario.GetEdad() > 27)
                 {
 
-                    lista100[cont2] = usuario;
+                    lista100.Add(usuario);
 
-                    cont2 = cont2 + 1;
+                    cont2 += 1;
 
                 }
             }
@@ -78,12 +83,12 @@ namespace tarea
                     if (j == 0)
                     {
 
-                        personas.WriteLine("Personas menores a 13 años: " + lista13[j].getNombre() + " " + lista13[j].getS_nombre() + " " + lista13[j].getApellido() + " " + lista13[j].getS_apellido() + " " + lista13[j].getFecha_nacimiento() + " " + lista13[j].getDireccion() + "\n");
+                        personas.WriteLine("Personas menores a 13 años: " + lista13[j].nombre + " " + lista13[j].segundo_nombre + " " + lista13[j].apellido_paterno + " " + lista13[j].apellido_materno + " " + lista13[j].fecha_nacimiento.ToString("dd/mm/yyyy") + " " + lista13[j].direccion + "\n");
                     }
 
                     else
                     {
-                        personas.WriteLine(lista13[j].getNombre() + " " + lista13[j].getS_nombre() + " " + lista13[j].getApellido() + " " + lista13[j].getS_apellido() + " " + lista13[j].getFecha_nacimiento() + " " + lista13[j].getDireccion() + "\n");
+                        personas.WriteLine(lista13[j].nombre + " " + lista13[j].segundo_nombre + " " + lista13[j].apellido_paterno + " " + lista13[j].apellido_materno + " " + lista13[j].fecha_nacimiento.ToString("dd/mm/yyyy") + " " + lista13[j].direccion + "\n");
                     }
 
                 }
@@ -93,12 +98,12 @@ namespace tarea
                     if (j == 0)
                     {
 
-                        personas.WriteLine("Personas mayores a 13 años: " + lista27[j].getNombre() + " " + lista27[j].getS_nombre() + " " + lista27[j].getApellido() + " " + lista27[j].getS_apellido() + " " + lista27[j].getFecha_nacimiento() + " " + lista27[j].getDireccion() + "\n");
+                        personas.WriteLine("Personas mayores a 13 años: " + lista27[j].nombre + " " + lista27[j].segundo_nombre + " " + lista27[j].apellido_paterno + " " + lista27[j].apellido_materno + " " + lista27[j].fecha_nacimiento.ToString("dd/mm/yyyy") + " " + lista27[j].direccion + "\n");
                     }
 
                     else
                     {
-                        personas.WriteLine(lista27[j].getNombre() + " " + lista27[j].getS_nombre() + " " + lista27[j].getApellido() + " " + lista27[j].getS_apellido() + " " + lista27[j].getFecha_nacimiento() + " " + lista27[j].getDireccion() + "\n");
+                        personas.WriteLine(lista27[j].nombre + " " + lista27[j].segundo_nombre + " " + lista27[j].apellido_paterno + " " + lista27[j].apellido_materno + " " + lista27[j].fecha_nacimiento.ToString("dd/mm/yyyy") + " " + lista27[j].direccion + "\n");
                     }
                 }
                 for (int j = 0; j < cont2; j++)
@@ -107,12 +112,12 @@ namespace tarea
                     if (j == 0)
                     {
 
-                        personas.WriteLine("Personas mayores a 27 años: " + lista100[j].getNombre() + " " + lista100[j].getS_nombre() + " " + lista100[j].getApellido() + " " + lista100[j].getS_apellido() + " " + lista100[j].getFecha_nacimiento() + " " + lista100[j].getDireccion() + "\n");
+                        personas.WriteLine("Personas mayores de 27 años: " + lista100[j].nombre + " " + lista100[j].segundo_nombre + " " + lista100[j].apellido_paterno + " " + lista100[j].apellido_materno + " " + lista100[j].fecha_nacimiento.ToString("dd/mm/yyyy") + " " + lista100[j].direccion + "\n");
                     }
 
                     else
                     {
-                        personas.WriteLine(lista100[j].getNombre() + " " + lista100[j].getS_nombre() + " " + lista100[j].getApellido() + " " + lista100[j].getS_apellido() + " " + lista100[j].getFecha_nacimiento() + " " + lista100[j].getDireccion() + "\n");
+                        personas.WriteLine(lista100[j].nombre + " " + lista100[j].segundo_nombre + " " + lista100[j].apellido_paterno + " " + lista100[j].apellido_materno + " " + lista100[j].fecha_nacimiento.ToString("dd/mm/yyyy") + " " + lista100[j].direccion + "\n");
                     }
 
                 }
@@ -120,69 +125,5 @@ namespace tarea
             }
         }
     }
-    class persona
-    {
-        public String nombre, s_nombre, apellido, s_apellido, fecha_nacimiento, direccion;
-        public int edad;
-
-        public void setNombre(String nombre)
-        {
-            this.nombre = nombre;
-        }
-        public String getNombre()
-        {
-
-            return this.nombre;
-        }
-        public void setS_nombre(String s_nombre)
-        {
-            this.s_nombre = s_nombre;
-        }
-        public String getS_nombre()
-        {
-            return this.s_nombre;
-        }
-        public void setApellido(String apellido)
-        {
-            this.apellido = apellido;
-        }
-        public String getApellido()
-        {
-            return this.apellido;
-        }
-        public void setS_apellido(String s_apellido)
-        {
-            this.s_apellido = s_apellido;
-        }
-        public String getS_apellido()
-        {
-            return this.s_apellido;
-        }
-        public void setFecha_nacimiento(String fecha_nacimiento)
-        {
-            this.fecha_nacimiento = fecha_nacimiento;
-            DateTime birth = DateTime.Parse(fecha_nacimiento);
-            DateTime actual = new DateTime(2020, 09, 10);
-            edad = actual.Subtract(birth).Days;
-        }
-        public String getFecha_nacimiento()
-        {
-            return this.fecha_nacimiento;
-        }
-        public Int32 getEdad()
-        {
-            return this.edad;
-        }
-        public void setDireccion(String direccion)
-        {
-            this.direccion = direccion;
-        }
-
-        public String getDireccion()
-        {
-            return this.direccion;
-        }
-
-
-    }
+    
 }
